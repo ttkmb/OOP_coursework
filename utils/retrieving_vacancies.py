@@ -1,11 +1,11 @@
-from utils.apis import headhunter_api, superjob_api
-from vacancy.vacancy import vacancy
+from utils.apis import HeadHunterAPI, SuperJobAPI
+from vacancy.vacancy import Vacancy
 
 def hh_vacancies(skill_name, count_vacancies):
     """
     Извлекает вакансии из HeadHunterAPI на основе предоставленного названия вакансии.
     """
-    hh = headhunter_api(skill_name, count_vacancies)
+    hh = HeadHunterAPI(skill_name, count_vacancies)
     vacancies = hh.get_vacancies()
     total_vacancies = []
     for item in vacancies:
@@ -15,7 +15,7 @@ def hh_vacancies(skill_name, count_vacancies):
         salary_currency = '' if salary == 'Не указана' else item['salary']['currency']
         description = item['snippet']['responsibility'] if item['snippet'] and 'responsibility' in item['snippet'] else 'Не указана'
         experience = item['experience']['name'] if item['experience'] and 'name' in item['experience'] else 'Без опыта'
-        needed = vacancy(vacancy_name, url, salary, salary_currency, description, experience)
+        needed = Vacancy(vacancy_name, url, salary, salary_currency, description, experience)
         total_vacancies.append(needed)
     return total_vacancies
 
@@ -23,7 +23,7 @@ def sj_vacancies(vacancy_name, count_vacancies):
     """
     Извлекает вакансии из SuperJobAPI на основе предоставленного названия вакансии.
     """
-    sj = superjob_api(vacancy_name, count_vacancies)
+    sj = SuperJobAPI(vacancy_name, count_vacancies)
     vacancies = sj.get_vacancies()
     total_vacancies = []
     for item in vacancies:
@@ -34,7 +34,7 @@ def sj_vacancies(vacancy_name, count_vacancies):
             salary_currency = '' if salary == 'Не указана' else correct_item['currency']
             description = correct_item['candidat']
             experience = correct_item['experience']['title']
-            needed = vacancy(vacancy_name, url, salary, salary_currency, description, experience)
+            needed = Vacancy(vacancy_name, url, salary, salary_currency, description, experience)
             total_vacancies.append(needed)
     return total_vacancies
 

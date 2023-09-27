@@ -2,7 +2,7 @@ import json
 import os
 from abc import abstractmethod, ABC
 
-class file_worker(ABC):
+class FileWorker(ABC):
     """
     Абстрактный класс для работы с файлами
     """
@@ -21,7 +21,7 @@ class file_worker(ABC):
     def delete_vacancy(self, vacancy_name):
         pass
 
-class json_saver(file_worker):
+class JsonSaver(FileWorker):
     def __init__(self, file_name):
         self.file_name = file_name
 

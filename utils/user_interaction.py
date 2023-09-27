@@ -1,4 +1,4 @@
-from json_saver.json_saver import json_saver
+from json_saver.json_saver import JsonSaver
 from utils.retrieving_vacancies import hh_vacancies, sj_vacancies
 
 
@@ -10,7 +10,7 @@ def user_interaction():
     Пользователь может выбрать поиск вакансий на разных сайтах, просмотреть сохраненные вакансии,
     удалить вакансии или выйти из программы.
     """
-    json_file = json_saver('../OOP_coursework/vacancies.json')
+    json_file = JsonSaver('../OOP_coursework/vacancies.json')
     json_file.create_file()
     while True:
         print(

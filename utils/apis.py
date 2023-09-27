@@ -4,7 +4,7 @@ from abc import abstractmethod, ABC
 import requests
 
 
-class api_Worker(ABC):
+class ApiWorker(ABC):
     """
     Абстрактный класс для работы с API
     """
@@ -13,7 +13,7 @@ class api_Worker(ABC):
         pass
 
 
-class headhunter_api(api_Worker):
+class HeadHunterAPI(ApiWorker):
     def __init__(self, vacancy_name, count_vacancies):
         self.vacancy_name = vacancy_name
         self.count_vacancies = count_vacancies
@@ -36,7 +36,7 @@ class headhunter_api(api_Worker):
 
 
 
-class superjob_api(api_Worker):
+class SuperJobAPI(ApiWorker):
     def __init__(self, vacancy_name, count_vacancies):
         self.vacancy_name = vacancy_name
         self.count_vacancies = count_vacancies
