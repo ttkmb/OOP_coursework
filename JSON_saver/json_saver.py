@@ -2,7 +2,7 @@ import json
 import os
 from abc import abstractmethod, ABC
 
-class FileWorker(ABC):
+class file_worker(ABC):
     """
     Абстрактный класс для работы с файлами
     """
@@ -14,16 +14,16 @@ class FileWorker(ABC):
         pass
 
     @abstractmethod
-    def get_vacancies_by_salary(self, salary: str):
+    def get_vacancies_by_salary(self, salary: str, salary_currency):
         pass
 
     @abstractmethod
     def delete_vacancy(self, vacancy_name):
         pass
 
-class JSONSaver(FileWorker):
+class json_saver(file_worker):
     def __init__(self, file_name):
-        self.file_name = file_name # ИЗМЕНИТЬ ПУТЬ!!!!
+        self.file_name = file_name
 
     def create_file(self):
         """
@@ -53,14 +53,14 @@ class JSONSaver(FileWorker):
         with open(self.file_name, 'w', encoding='utf-8') as file:
             json.dump(data, file, ensure_ascii=False, indent=4)
 
-    def get_vacancies_by_salary(self, salary: str):
+    def get_vacancies_by_salary(self, salary: str, salary_currency):
         vacancies_salary = []
         with open(self.file_name, 'r') as file:
             vacancies = json.load(file)
             for vacancy in vacancies:
                 try:
                     needed_salary = list(map(int, vacancy['salary'].split('-')))
-                    if needed_salary[0] <= int(salary) <= needed_salary[1]:
+                    if (needed_salary[0] <= int(salary) <= needed_salary[1] and vacancy['salary_currency'].lower() == salary_currency.lower()) or (int(salary) == int(vacancy['salary']) and salary_currency.lower() == vacancy['salary_currency'].lower()):
                         vacancies_salary.append(vacancy)
                 except (ValueError, IndexError, TypeError, AttributeError):
                     continue
@@ -100,4 +100,9 @@ class JSONSaver(FileWorker):
     def load_vacancies(self):
         with open(self.file_name, 'r', encoding='utf-8') as file:
             vacancies = json.load(file)
-            return vacancies
+            for vacancy in vacancies:
+                print("Название вакансии:", vacancy['vacancy_name'])
+                print("Ссылка на вакансию:", vacancy['link'])
+                print("Зарплата:", vacancy['salary'])
+                print("Валюта:", vacancy['salary_currency'])
+                print("Описание:", vacancy['description'], "\n")

@@ -1,4 +1,4 @@
-class Vacancy:
+class vacancy:
     """
     Класс для представления вакансии.
     Имеет следующие поля: название вакансии, ссылка на вакансию, зарплата, валюта, описание
@@ -12,27 +12,27 @@ class Vacancy:
         self.experience = expirience
 
     def __eq__(self, other):
-        if isinstance(other, Vacancy):
+        if isinstance(other, vacancy):
             return self.salary == other.salary
         raise TypeError('Невозможно сравнить объекты разных типов.')
 
     def __gt__(self, other):
-        if isinstance(other, Vacancy):
+        if isinstance(other, vacancy):
             return self.salary > other.salary
         raise TypeError('Невозможно сравнить объекты разных типов.')
 
     def __lt__(self, other):
-        if isinstance(other, Vacancy):
+        if isinstance(other, vacancy):
             return self.salary < other.salary
         raise TypeError('Невозможно сравнить объекты разных типов.')
 
     def __ge__(self, other):
-        if isinstance(other, Vacancy):
+        if isinstance(other, vacancy):
             return self.salary >= other.salary
         raise TypeError('Невозможно сравнить объекты разных типов.')
 
     def __le__(self, other):
-        if isinstance(other, Vacancy):
+        if isinstance(other, vacancy):
             return self.salary <= other.salary
         raise TypeError('Невозможно сравнить объекты разных типов.')
 
