@@ -1,4 +1,4 @@
-from JSON_saver.json_saver import json_saver
+from json_saver.json_saver import json_saver
 from utils.retrieving_vacancies import hh_vacancies, sj_vacancies
 
 

@@ -1,5 +1,5 @@
 from utils.apis import headhunter_api, superjob_api
-from Vacancy.vacancy import vacancy
+from vacancy.vacancy import vacancy
 
 def hh_vacancies(skill_name, count_vacancies):
     """
